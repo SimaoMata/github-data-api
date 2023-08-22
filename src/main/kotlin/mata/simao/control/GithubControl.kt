@@ -1,32 +1,31 @@
 package mata.simao.control
 
 import jakarta.enterprise.context.ApplicationScoped
-import mata.simao.control.mapper.RepositoryBranchMapper
-import mata.simao.control.mapper.UserRepositoryMapper
-import mata.simao.entity.RepositoryBranch
-import mata.simao.entity.UserRepository
+import mata.simao.control.mapper.BranchMapper
+import mata.simao.control.mapper.RepositoryMapper
+import mata.simao.entity.Branch
+import mata.simao.entity.Repository
 import mata.simao.integration.GithubService
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.rest.client.inject.RestClient
 
 @ApplicationScoped
 class GithubControl(
-    @ConfigProperty(name = "github.data.api.key")
+    @ConfigProperty(name = "rest-client.repository-api.key")
     private val authorizationHeaderParam: String,
     @RestClient private val githubService: GithubService,
-    private val userRepositoryMapper: UserRepositoryMapper,
-    private val repositoryBranchMapper: RepositoryBranchMapper
+    private val repositoryMapper: RepositoryMapper,
+    private val branchMapper: BranchMapper
 ) {
-    fun getListOfRepositoriesByUsername(username: String): List<UserRepository> {
-        println("user inside control : $username")
+    fun getListOfRepositoriesByUsername(username: String): List<Repository> {
         return githubService
             .getUserRepositories(authorizationHeaderParam, username, "100", "1")
             .filter { it.fork == false || it.fork == null }
-            .map { userRepositoryMapper.buildRepositoryResponse(it) }
+            .map { repositoryMapper.buildRepositoryResponse(it) }
             .map { it.also { repo -> repo.branches = getListOfBranchesByRepository(repo) } }
     }
 
-    private fun getListOfBranchesByRepository(repo: UserRepository): List<RepositoryBranch> =
+    private fun getListOfBranchesByRepository(repo: Repository): List<Branch> =
         githubService
             .getRepositoryBranches(
                 authorizationHeaderParam,
@@ -35,5 +34,5 @@ class GithubControl(
                 "100",
                 "1"
             )
-            .map { repositoryBranchMapper.buildBranchResponse(it) }
+            .map { branchMapper.buildBranchResponse(it) }
 }

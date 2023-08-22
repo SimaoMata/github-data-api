@@ -1,13 +1,13 @@
 package mata.simao.control.mapper
 
 import jakarta.enterprise.context.ApplicationScoped
-import mata.simao.entity.RepositoryBranch
+import mata.simao.entity.Branch
 import mata.simao.integration.entity.BranchDto
 
 @ApplicationScoped
-class RepositoryBranchMapper {
+class BranchMapper {
     fun buildBranchResponse(branchDto: BranchDto) =
-        RepositoryBranch(
+        Branch(
             name = branchDto.name,
             lastCommitSha = branchDto.commit?.sha
         )

@@ -1,6 +1,6 @@
 package mata.simao.entity
 
-data class RepositoryBranch(
+data class Branch(
     var name: String? = null,
     var lastCommitSha: String? =null
 )

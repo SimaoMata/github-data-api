@@ -22,7 +22,9 @@ class GithubResource(
         @QueryParam("user") username: String
     ): Response {
         if (acceptHeader == "application/xml") {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build()
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(
+                Json.createArrayBuilder()
+            ).build()
         }
         return githubControl.getListOfRepositoriesByUsername(username)
             .let { Response.ok().entity(it).build() }
