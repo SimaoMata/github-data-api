@@ -1,8 +1,8 @@
 package mata.simao.control.mapper
 
+import jakarta.enterprise.context.ApplicationScoped
 import mata.simao.entity.RepositoryBranch
 import mata.simao.integration.entity.BranchDto
-import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class RepositoryBranchMapper {

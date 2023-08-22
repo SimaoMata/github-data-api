@@ -1,8 +1,8 @@
 package mata.simao.control.mapper
 
+import jakarta.enterprise.context.ApplicationScoped
 import mata.simao.entity.UserRepository
 import mata.simao.integration.entity.RepositoryDto
-import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class UserRepositoryMapper {

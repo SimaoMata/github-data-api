@@ -1,8 +1,6 @@
 package mata.simao.control
 
 import jakarta.enterprise.context.ApplicationScoped
-import jakarta.enterprise.context.Dependent
-import jakarta.enterprise.inject.Stereotype
 import mata.simao.control.mapper.RepositoryBranchMapper
 import mata.simao.control.mapper.UserRepositoryMapper
 import mata.simao.entity.RepositoryBranch
@@ -38,8 +36,4 @@ class GithubControl(
                 "1"
             )
             .map { repositoryBranchMapper.buildBranchResponse(it) }
-
-    fun abc(): String {
-        return githubService.abc()
-    }
 }
