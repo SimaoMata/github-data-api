@@ -16,19 +16,19 @@ interface GithubService {
     @GET
     @Path("/users/{username}/repos")
     fun getUserRepositories(
-        @HeaderParam("Authorization") authorization: String,
-        @PathParam("username") username: String,
-        @QueryParam("per_page") perPage: String,
-        @QueryParam("page") page: String
+        @HeaderParam("Authorization") authorization: String?,
+        @PathParam("username") username: String?,
+        @QueryParam("per_page") perPage: Int?,
+        @QueryParam("page") page: Int?
     ): List<RepositoryDto>
 
     @GET
     @Path("/repos/{username}/{repo}/branches")
     fun getRepositoryBranches(
         @HeaderParam("Authorization") authorization: String,
-        @PathParam("username") username: String,
-        @PathParam("repo") repo: String,
-        @QueryParam("per_page") perPage: String,
-        @QueryParam("page") page: String
+        @PathParam("username") username: String?,
+        @PathParam("repo") repo: String?,
+        @QueryParam("per_page") perPage: Int?,
+        @QueryParam("page") page: Int?
     ): List<BranchDto>
 }
