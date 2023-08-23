@@ -10,12 +10,12 @@ class RestClientExceptionMapper : ResponseExceptionMapper<RuntimeException> {
         return when (response.status) {
             Response.Status.NOT_FOUND.statusCode -> RepositoriesNotFoundException
             else -> {
-                InternalServerErrorException("AAAAAA")
+                InternalServerErrorException("Internal Server Error")
             }
         }
     }
 }
 
-object RepositoriesNotFoundException : RuntimeException("repository not found ") {
+object RepositoriesNotFoundException : RuntimeException("Repository not found ") {
     private fun readResolve(): Any = RepositoriesNotFoundException
 }

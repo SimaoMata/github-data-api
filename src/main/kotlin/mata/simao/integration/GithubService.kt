@@ -1,7 +1,6 @@
 package mata.simao.integration
 
 import jakarta.ws.rs.*
-import jakarta.ws.rs.core.MediaType
 import koltin.integration.RestClientExceptionMapper
 import mata.simao.integration.entity.BranchDto
 import mata.simao.integration.entity.RepositoryDto
