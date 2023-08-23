@@ -19,7 +19,7 @@ class GithubControl(
     private val branchMapper: BranchMapper
 ) {
     companion object {
-        const val PER_PAGE_VALUE = 1
+        const val PER_PAGE_VALUE = 100
     }
 
     fun getListOfRepositoriesByUsername(username: String): List<Repository> {
