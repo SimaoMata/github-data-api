@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Sample API
+  title: GitHub Data API
   version: 1.0.0
 
 paths:
