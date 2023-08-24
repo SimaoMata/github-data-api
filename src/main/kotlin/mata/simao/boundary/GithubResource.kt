@@ -20,9 +20,8 @@ class GithubResource(
     @Path("/repository")
     fun getUserRepositories(
         @QueryParam("user") username: String
-    ): Response {
-        return githubControl.getListOfRepositoriesByUsername(username)
-            .let { Response.ok(it).build() }
-    }
+    ): Response = githubControl
+        .getListOfRepositoriesByUsername(username)
+        .let { Response.ok(it).build() }
 }
 
