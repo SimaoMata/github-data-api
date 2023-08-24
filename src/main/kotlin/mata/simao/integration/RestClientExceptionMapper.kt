@@ -16,6 +16,6 @@ class RestClientExceptionMapper : ResponseExceptionMapper<RuntimeException> {
     }
 }
 
-object RepositoriesNotFoundException : RuntimeException("Repository not found ") {
+object RepositoriesNotFoundException : RuntimeException("Repository not found") {
     private fun readResolve(): Any = RepositoriesNotFoundException
 }

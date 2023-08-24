@@ -14,7 +14,7 @@
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.2.4.Final</quarkus.platform.version>
-        <skipITs>true</skipITs>
+        <skipITs>false</skipITs>
         <surefire-plugin.version>3.0.0</surefire-plugin.version>
         <kotlin.version>1.9.0</kotlin.version>
     </properties>
@@ -69,6 +69,17 @@
             <version>5.3.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <version>2.35.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>kotlin-extensions</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
@@ -95,6 +106,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler-plugin.version}</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/*IT.kt</exclude>
+                    </excludes>
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
@@ -119,6 +133,9 @@
                             <goal>verify</goal>
                         </goals>
                         <configuration>
+                            <excludes>
+                                <exclude>**/*Test.kt</exclude>
+                            </excludes>
                             <systemPropertyVariables>
                                 <native.image.path>${project.build.directory}/${project.build.finalName}-runner
                                 </native.image.path>
