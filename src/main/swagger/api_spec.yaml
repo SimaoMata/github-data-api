@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: 1.0.0
+
+paths:
+  /api/repository:
+    get:
+      summary: Get a list of repositories
+      parameters:
+        - name: user
+          in: query
+          description: Name of the User of the repositories
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with a list with repositories
+          content:
+            application/json:
+              example:
+                [
+                  {
+                    "branches": [
+                      {
+                        "lastCommitSha": "ec60951ea05629ec4e30757fa772c909029a091d",
+                        "name": "main"
+                      }
+                    ],
+                    "ownerLogin": "User",
+                    "repositoryName": "RepositoryName"
+                  }
+                ],
+                []
+        '404':
+          description: Resource not found with that given user
+          content:
+            application/json:
+              example:
+                {
+                  "status": "404",
+                  "Message": "The requested resource could not be found. There is no repository with that given username."
+                }
+        '406':
+          description: Resource not found with that given user
+          content:
+            application/json:
+              example:
+                {
+                  "status": "406",
+                  "Message": "The server cannot provide the response in the requested format. Please modify the 'Accept' header to include compatible formats, such as 'application/json'."
+                }
