@@ -1,11 +1,13 @@
 # github-data-api
-Rest Service to access the repositories of a given User with GitHub V3 as a backing API.
+Rest Service to access the repositories of a given User with [GitHub API V3](https://docs.github.com/pt/rest?apiVersion=2022-11-28) as a backing API.
 
 This project uses [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework.
 
 ## Prerequisites
 1. Java 11
 2. Maven 3.9.4
+3. [AWS Commmand Line Interface](https://aws.amazon.com/cli/)
+4. [Docker](https://docks.docker.com/get-docker/)
 
 ## Running the application in dev mode
 
@@ -54,5 +56,11 @@ You can then execute your native executable with: `./target/github-data-api-1.0.
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-## Useful Documents
-[Gihub API v3](https://docs.github.com/pt/rest?apiVersion=2022-11-28)
+## Building and Running a Docker Image
+```shell script
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/github-data-api-jvm .
+```
+
+```shell script
+docker run -i --rm -p 8080:8080 quarkus/github-data-api-jvm
+```
