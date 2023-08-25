@@ -3,24 +3,29 @@ package mata.simao.boundary
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
+import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.http.Header
 import io.restassured.path.json.JsonPath
 import jakarta.ws.rs.core.Response.Status
+import mata.simao.config.InjectWireMock
+import mata.simao.config.WiremockResource
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 
 @QuarkusTest
+@QuarkusTestResource(value = WiremockResource::class, parallel = true)
 internal class GithubResourceIT {
 
-    private val wiremockServer = WireMockServer(7777)
+    @InjectWireMock
+    private lateinit var wiremockServer: WireMockServer
 
     companion object {
-        private const val VALID_USERNAME = "validUsername"
+        private const val VALID_USERNAME = "octocat"
         private const val INVALID_USERNAME = "invalidUsername"
         private const val VALID_REPO = "Hello-World"
         private const val PER_PAGE = 100
@@ -44,7 +49,9 @@ internal class GithubResourceIT {
             JsonPath(getFileContentAsString("wiremock/data/repositories.json"))
         wiremockServer.stubFor(
             WireMock.get(GET_REPOSITORIES_BY_USER_V3.format(VALID_USERNAME, PER_PAGE, 1))
-                .willReturn(WireMock.okJson(successfulRepositoryResponse.prettify()))
+                .willReturn(
+                    WireMock.okJson(successfulRepositoryResponse.prettify())
+                )
         )
         wiremockServer.stubFor(
             WireMock.get(GET_REPOSITORIES_BY_USER_V3.format(VALID_USERNAME, PER_PAGE, 2))
@@ -57,7 +64,9 @@ internal class GithubResourceIT {
         wiremockServer.stubFor(
             WireMock.get(GET_REPOSITORIES_BY_USER_V3.format(INVALID_USERNAME, PER_PAGE, 1))
                 .willReturn(
-                    aResponse().withStatus(404).withBody(repositoryNotFoundResponse.prettify())
+                    aResponse()
+                        .withStatus(404)
+                        .withBody(repositoryNotFoundResponse.prettify())
                 )
         )
 
