@@ -15,6 +15,7 @@ You can run your application in dev mode that enables live coding using:
 ```shell script
 mvn compile quarkus:dev
 ```
+> **_NOTE:_** Update application.properties file with a github api token, provided [here](https://github.com/settings/tokens?type=beta)
 
 The application becomes available at: [https://localhost:8080](https://localhost:8080)
 
