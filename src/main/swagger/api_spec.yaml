@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 
 paths:
-  /api/repository:
+  /api/repositories:
     get:
       summary: Get a list of repositories
       parameters:
@@ -31,8 +31,7 @@ paths:
                     "ownerLogin": "User",
                     "repositoryName": "RepositoryName"
                   }
-                ],
-                []
+                ]
         '404':
           description: Resource not found with that given user
           content:

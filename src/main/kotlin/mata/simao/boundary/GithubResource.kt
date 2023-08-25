@@ -17,7 +17,7 @@ class GithubResource(
 ) {
 
     @GET
-    @Path("/repository")
+    @Path("/repositories")
     fun getUserRepositories(
         @QueryParam("user") username: String
     ): Response = githubControl

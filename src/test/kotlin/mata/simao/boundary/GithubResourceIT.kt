@@ -33,7 +33,7 @@ internal class GithubResourceIT {
         private const val GET_REPOSITORIES_BY_USER_V3 = "/users/%s/repos?per_page=%s&page=%s"
         private const val GET_BRANCHES_BY_REPOSITORY_V3 = "/repos/%s/%s/branches?per_page=%s&page=%s"
 
-        private const val GET_USER_REPOSITORIES_URL = "/api/repository?user=%s"
+        private const val GET_USER_REPOSITORIES_URL = "/api/repositories?user=%s"
 
         private const val ACCEPT_HEADER = "Accept"
         private val JSON_ACCEPT_HEADER = Header(ACCEPT_HEADER, "application/json")
